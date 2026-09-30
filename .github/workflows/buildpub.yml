@@ -4,6 +4,7 @@ on: [push]
 
 jobs:
   create-release:
+    if: contains(github.event.head_commit.message, '[RELEASE]')
     name: Create Release
     runs-on: ubuntu-latest
     permissions:
@@ -31,6 +32,7 @@ jobs:
           prerelease: false
           generate_release_notes: true # Automatically populates release notes with commit logs
   linux:
+    if: contains(github.event.head_commit.message, '[RELEASE]')
     name: Build and Publish for Linux
     runs-on: ubuntu-latest
     permissions:
@@ -102,6 +104,7 @@ jobs:
           tag_name: ${{ github.ref_name }}
           files: ClassroomCompanion-linux.zip
   windows:
+    if: contains(github.event.head_commit.message, '[RELEASE]')
     name: Build and Publish for Windows
     # This instructs GitHub to use a Windows-hosted virtual machine
     runs-on: windows-latest
@@ -120,21 +123,7 @@ jobs:
 
           # Comma or newline separated list of names of job dependencies for this step, it must be `name:` property of job if set
           # required: true
-          jobs: 'create-release'
-
-          # Comma separated list of JSON artifacts from (jobs in) this build that will be parse to set as output for this step
-          # required: false
-          outputs-from: 'job1_output.json,job2_output.json'
-
-          # Instead of exact job name match, check prefix of job names. Useful in case of reusable workflows
-          # default: 'false'
-          # required: false
-          prefix: 'false'
-
-          # Instead of exact job name match, check suffix of job names. Useful in case of reusable workflows
-          # default: 'false'
-          # required: false
-          suffix: 'true'
+          jobs: Create Release
 
           # Interval in milliseconds between each check of dependencies completion
           # default: '2000'
@@ -144,7 +133,7 @@ jobs:
           # Maximum number of minutes to wait before giving up. Step will fail with message providing remaining job names.
           # default: '5'
           # required: false
-          ttl: '5'
+          ttl: '20'
 
           # If set to true, the ttl will NOT be overridden to 15 minutes if it is set more than 15 minutes
           # default: 'false'
@@ -177,6 +166,7 @@ jobs:
           files: ClassroomCompanion.zip
 
   macos:
+    if: contains(github.event.head_commit.message, '[RELEASE]')
     name: Build and Publish for macOS
     runs-on: macos-latest
     permissions:
