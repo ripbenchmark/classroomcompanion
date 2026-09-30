@@ -1,0 +1,14 @@
+{
+  "name": "Classroom Companion",
+  "image": "mcr.microsoft.com/devcontainers/python",
+  "hostRequirements": {
+    "cpus": 2,
+    "memory": "8gb"
+  },
+  "features": {
+    "ghcr.io/devcontainers/features/desktop-lite:1.2.10": {},
+    "ghcr.io/devcontainers-extra/features/ffmpeg-apt-get:1": {},
+    "ghcr.io/stu-bell/devcontainer-features/python:0": {},
+    "ghcr.io/devcontainers/features/sshd:1": {}
+  }
+}
