@@ -1,0 +1,4 @@
+{
+  "name": "Classroom Companion - Windows",
+  "image": "mcr.microsoft.com/windows/servercore:ltsc2025"
+}
